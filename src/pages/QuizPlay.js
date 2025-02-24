@@ -30,7 +30,9 @@ const QuizPlay = () => {
 
   return (
     <div>
-      <h1>Quiz</h1>
+      <Typography variant="h4" gutterBottom>
+        Quiz
+      </Typography>
       {currentQuestion < questions.length ? (
         <QuestionCard
           question={questions[currentQuestion]}
@@ -38,7 +40,7 @@ const QuizPlay = () => {
           onAnswer={handleAnswer}
         />
       ) : (
-        <h2>Punteggio finale: {score}</h2>
+        <Typography variant="h5">Punteggio finale: {score}</Typography>
       )}
     </div>
   );

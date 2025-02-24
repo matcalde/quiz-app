@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Typography, List, ListItem, Button, Container } from '@mui/material';
 import { supabase } from '../services/supabase';
 
 const Dashboard = () => {
@@ -14,19 +15,36 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <ul>
+    <Container maxWidth="md" sx={{ mt: 8 }}>
+      <Typography variant="h4" gutterBottom>
+        Dashboard
+      </Typography>
+      <List>
         {quizzes.map((quiz) => (
-          <li key={quiz.id}>
-            {quiz.title} - 
-            <button onClick={() => alert('Modifica quiz')}>Modifica</button> | 
-            <button onClick={() => alert('Elimina quiz')}>Elimina</button>
-          </li>
+          <ListItem key={quiz.id}>
+            {quiz.title}{' '}
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => alert('Modifica quiz')}
+            >
+              Modifica
+            </Button>{' '}
+            <Button
+              variant="outlined"
+              color="error"
+              size="small"
+              onClick={() => alert('Elimina quiz')}
+            >
+              Elimina
+            </Button>
+          </ListItem>
         ))}
-      </ul>
-      <button onClick={() => alert('Crea nuovo quiz')}>Crea Quiz</button>
-    </div>
+      </List>
+      <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+        Crea Quiz
+      </Button>
+    </Container>
   );
 };
 

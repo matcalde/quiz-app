@@ -1,16 +1,22 @@
 import React from 'react';
+import { List, ListItem, ListItemText, Typography } from '@mui/material';
 
 const Leaderboard = ({ scores }) => {
   return (
     <div>
-      <h2>Classifica</h2>
-      <ul>
+      <Typography variant="h5" gutterBottom>
+        Classifica
+      </Typography>
+      <List>
         {scores.map((score, index) => (
-          <li key={index}>
-            {score.nickname} - {score.score} punti
-          </li>
+          <ListItem key={index}>
+            <ListItemText
+              primary={`${index + 1}. ${score.nickname}`}
+              secondary={`Punteggio: ${score.score}`}
+            />
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };

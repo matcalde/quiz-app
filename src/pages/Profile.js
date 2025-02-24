@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TextField, Button, Typography, Container } from '@mui/material';
 import { supabase } from '../services/supabase';
 
 const Profile = () => {
@@ -6,30 +7,46 @@ const Profile = () => {
   const [avatar, setAvatar] = useState('');
 
   const handleUpdateProfile = async () => {
-    const { error } = await supabase
-      .from('users')
-      .update({ nickname, avatar })
-      .eq('id', 'USER_ID'); // Sostituisci USER_ID con l'ID dell'utente loggato
-    if (error) console.error(error);
+    try {
+      const { error } = await supabase
+        .from('users')
+        .update({ nickname, avatar })
+        .eq('id', 'USER_ID'); // Sostituisci USER_ID con l'ID dell'utente loggato
+      if (error) throw error;
+      alert('Profilo aggiornato con successo!');
+    } catch (error) {
+      alert(error.message || 'Errore durante l'aggiornamento del profilo.');
+    }
   };
 
   return (
-    <div>
-      <h1>Gestisci Profilo</h1>
-      <input
-        type="text"
-        placeholder="Nickname"
+    <Container maxWidth="sm" sx={{ mt: 8 }}>
+      <Typography variant="h4" gutterBottom>
+        Gestisci Profilo
+      </Typography>
+      <TextField
+        label="Nickname"
         value={nickname}
         onChange={(e) => setNickname(e.target.value)}
+        margin="normal"
+        fullWidth
       />
-      <input
-        type="text"
-        placeholder="Avatar URL"
+      <TextField
+        label="Avatar URL"
         value={avatar}
         onChange={(e) => setAvatar(e.target.value)}
+        margin="normal"
+        fullWidth
       />
-      <button onClick={handleUpdateProfile}>Aggiorna Profilo</button>
-    </div>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleUpdateProfile}
+        sx={{ mt: 2 }}
+      >
+        Aggiorna Profilo
+      </Button>
+    </Container>
   );
 };
 
