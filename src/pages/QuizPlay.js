@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { supabase } from '../../services/supabase';
-import QuestionCard from '../../components/QuestionCard';
+import { supabase } from '../services/supabase';
+import QuestionCard from '../components/QuestionCard';
 
 const QuizPlay = () => {
   const { quizId } = useParams();
